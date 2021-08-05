@@ -1,50 +1,8 @@
 import React, { useReducer } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 
-const initialState = {
-    cart: [],
-    produtcts: [],
-    user: null,
-    //foco apenas no number
-    number: 0
-}
-
-/*
-criar uma action para multiplcar por 7
-outra pra dividir por 25
-parser para int 
-
-adicionar um numero qualquer passar junto da acao
-
- */
-
-function reducer(state, action) {
-    switch (action.type) {
-        case 'numberAdd2':
-            return { ...state, number: state.number + 2 }
-            break
-        case 'login':
-            return { ...state, user: { name: action.payload } }
-            break
-        case 'muiltSeven':
-            return { ...state, number: state.number * 7 }
-            break
-        case 'divForTwentyFive':
-            return { ...state, number: state.number / 25 }
-            break
-        case 'parseForInteger':
-            return { ...state, number: parseInt(state.number) }
-            break
-        case 'addAnyNumber':
-            return { ...state, number: state.number + action.payload}
-            break
-        case 'zerar':
-            return { ...state, number: 0 }
-        default:
-            return state
-            break
-    }
-}
+import {initialState, reducer}from '../../store'
+import {numberAdd2, login} from '../../store/actions'
 
 const UseReducer = (props) => {
 
@@ -64,9 +22,9 @@ const UseReducer = (props) => {
                 <span className="text">{state.number}</span>
                 <div>
                     <button className="btn"
-                        onClick={() => dispatch({ type: 'numberAdd2' })}>+2</button>
+                        onClick={() => numberAdd2(dispatch)}>+2</button>
                     <button className="btn"
-                        onClick={() => dispatch({ type: 'login', payload: 'Eu da silva 2' })}>Login</button>
+                        onClick={() => login(dispatch, 'eu da silva 3')}>Login</button>
                 </div>
                 <div>
                     <button className="btn" onClick={
